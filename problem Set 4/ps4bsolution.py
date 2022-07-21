@@ -101,6 +101,49 @@ def compPlayHand(hand, wordList, n):
 #
 #
 def playGame(wordList):
+    HAND_SIZE = 7
+    storedHand = {}
+    while True:
+        play_input = str(input('Enter n to deal a new hand, r to replay the last hand, or e to end game: '))
+        if play_input == "e":
+            break
+        elif play_input == "r":
+            if storedHand == {}:
+                print("You have not played a hand yet. Please play a new hand first!")
+            else:
+                while True:
+                    choice_input = str(input("Enter u to have yourself play, c to have the computer play: "))
+                    if choice_input == "u":
+                        playHand(storedHand, wordList, HAND_SIZE)
+                        break
+                    elif choice_input == "c":
+                        compPlayHand(storedHand, wordList, HAND_SIZE)
+                        break
+                    elif choice_input == "e":
+                        break
+                    else:
+                        print("Invalid command.")
+
+        elif play_input == "n":
+            while True:
+                choice_input = str(input("Enter u to have yourself play, c to have the computer play: "))
+                if choice_input == "u":
+                    new_hand = dealHand(HAND_SIZE)
+                    storedHand = new_hand
+                    playHand(new_hand, wordList, HAND_SIZE)
+                    break
+                elif choice_input == "c":
+                    new_hand = dealHand(HAND_SIZE)
+                    storedHand = new_hand
+                    compPlayHand(new_hand, wordList, HAND_SIZE)
+                    break
+                elif choice_input == "e":
+                    break
+                else:
+                    print("Invalid command.")
+        else:
+            print("Invalid command.")
+
     """
     Allow the user to play an arbitrary number of hands.
  
@@ -124,8 +167,7 @@ def playGame(wordList):
 
     wordList: list (string)
     """
-    # TO DO... <-- Remove this comment when you code this function
-    print("playGame not yet implemented.") # <-- Remove this when you code this function
+
 
         
 #
